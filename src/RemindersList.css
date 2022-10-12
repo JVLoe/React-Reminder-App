@@ -1,0 +1,13 @@
+
+.remindersListContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.remindersList {
+    display: flex;
+    flex-direction: column;
+    font-size: 40px;
+    gap: 10px;
+}
+

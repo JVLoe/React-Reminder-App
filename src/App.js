@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Layout from "./Layout";
+import RemindersList from "./RemindersList";
+import AddReminderPage from "./AddReminderPage";
+import NotFound from "./NotFound";
+import {useState} from "react";
+import FontContext from "./FontContext";
+import './App.css'
+import RemindersListNewAndWorse from "./RemindersListNewAndWorse";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [currentFont, setCurrentFont] = useState('main-font')
+    return (
+        <FontContext.Provider value={
+            {
+                currentFont: currentFont,
+                setCurrentFont: setCurrentFont
+            }
+        }>
+        <div className="App">
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<RemindersListNewAndWorse />} />
+                        <Route path="/add" element={<AddReminderPage />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </div>
+        </FontContext.Provider>
+    );
 }
 
 export default App;
